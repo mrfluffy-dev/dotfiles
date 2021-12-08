@@ -12,7 +12,7 @@
 #  - /path/to/alacritty.yml
 
 import:
-  - /home/$USER/.config/alacritty/alacritty-master/dracula.yml
+  - ~/.config/alacritty/alacritty-master/dracula.yml
 
 
 # Any items in the `env` entry below will be added as
