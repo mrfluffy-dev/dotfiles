@@ -15,7 +15,6 @@ Plug 'ap/vim-css-color'
 Plug 'haskell/haskell-language-server'
 Plug 'neoclide/coc.nvim' , {'branch': 'release'}
 call plug#end()
-colorscheme wal
 
 set number relativenumber
 autocmd VimEnter * NERDTree
