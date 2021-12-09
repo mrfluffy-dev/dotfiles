@@ -105,4 +105,5 @@ source $ZSH/oh-my-zsh.sh
 alias ls="exa -lag --icons"
 alias vim="nvim"
 alias cat="bat"
-alias anime="/home/$USER/.config/script/ani-cli/ani-cli -q '720'"
+alias anime="/home/$USER/repos/ani-cli/ani-cli -q '720'"
+neofetch

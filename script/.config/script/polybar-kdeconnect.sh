@@ -6,7 +6,7 @@ YOFFSET=0
 XOFFSET=0
 WIDTH=12
 WIDTH_WIDE=24
-THEME='/home/mrfluffy/.config/rofi-menus/colors-rofi-dark.rasi'
+THEME='/home/mrfluffy/.config/rofi/colors-rofi-dark.rasi'
 
 # Color Settings of Icon shown in Polybar
 COLOR_DISCONNECTED='#000'       # Device Disconnected

@@ -138,7 +138,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, xK_backslash), scratchpadSpawnActionTerminal "alacritty -class scratchpad")
 
     -- launch rofi
-    , ((modm,               xK_d     ), spawn "rofi -no-lazy-greb -show drun -theme /home/$USER/.config/rofi-menus/colors-rofi-dark.rasi -icon-theme 'Papirus' -show-icons")
+    , ((modm,               xK_d     ), spawn "rofi -no-lazy-greb -show drun -icon-theme 'Papirus' -show-icons")
 
     -- launch a scrachpad
     , ((modm .|. shiftMask, xK_s     ), spawn "alacritty --class scratchpad")
