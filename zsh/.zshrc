@@ -1,8 +1,9 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$PATH
-
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$HOME/.local/bin:$PATH
+export XDG_CONFIG_HOME="$HOME/.config"
 # Path to your oh-my-zsh installation.
 export ZSH="/home/mrfluffy/.oh-my-zsh"
+export XDG_CURRENT_DESKTOP="river"
 #(cat ~/.cache/wal/sequences &)
 #source ~/.cache/wal/colors-tty.sh
 # Set name of the theme to load --- if set to "random", it will
@@ -10,7 +11,7 @@ export ZSH="/home/mrfluffy/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
-
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -105,5 +106,7 @@ source $ZSH/oh-my-zsh.sh
 alias ls="exa -lag --icons"
 alias vim="nvim"
 alias cat="bat"
-alias anime="/home/$USER/repos/ani-cli/ani-cli -q '720'"
+alias anime="~/repos/ani-cli/ani-cli -q '720'"
+alias mv="mvg -g"
+alias cp="cpg -g"
 neofetch

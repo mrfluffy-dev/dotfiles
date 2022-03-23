@@ -142,6 +142,9 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 # Enabe dark made
 config.set("colors.webpage.darkmode.enabled", True)
 
+# Spellcheck
+config.set('spellcheck.languages', ["en-US"])
+
 import dracula.draw
 
 # Load existing settings made via :set

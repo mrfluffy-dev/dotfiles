@@ -1,6 +1,5 @@
 #!/bin/bash
 
-sleep 30
 checkupdates > out.log 2>/dev/null
 
 if [ $? -eq 0 ]
