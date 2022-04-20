@@ -50,3 +50,4 @@
 ;(unpin! t)
 (package! rainbow-mode)
 (package! elcord)
+(package! poly-org)

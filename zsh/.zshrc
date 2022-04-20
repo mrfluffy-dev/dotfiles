@@ -6,11 +6,17 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey -v
 autoload -U promptinit; promptinit
 prompt spaceship
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin/genymotion:$HOME/bin:/usr/local/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 export XDG_CONFIG_HOME="$HOME/.config"
 export FZF_DEFAULT_COMMAND="rg ~ --files --hidden"
 export FZF_DEFAULT_OPTS='--height 30% --reverse'
 export FZF_CTRL_R_OPTS='--sort'
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[N" down-line-or-beginning-search
 alias ls="exa -lag --icons"
 alias vim="nvim"
 alias cat="bat"

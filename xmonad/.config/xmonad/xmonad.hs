@@ -85,7 +85,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
     , ((modm, xK_Return), spawn $ XMonad.terminal conf)
-    , ((modm, xK_backslash), scratchpadSpawnActionTerminal "kitty --class=scratchpad")
+    , ((modm, xK_backslash), scratchpadSpawnActionCustom "kitty --class=scrachpad")
 
     -- launch rofi
     , ((modm,               xK_d     ), spawn "rofi -no-lazy-greb -show drun -icon-theme 'Papirus' -show-icons")
@@ -203,7 +203,6 @@ myManageHook = composeAll
     , className =? "Qalculate-gtk"     --> doFloat
     , className =? "Pavucontrol"    --> doFloat
     , className =? "Minecraft Launcher"         --> doShift "8"
-    , className =? "Microsoft Teams - Preview"  --> doShift "7"
     , className =? "YouTube Music"  --> doShift "9"
     , className =? "Thunar"         --> viewShift "5"
     , resource  =? "desktop_window" --> doIgnore
