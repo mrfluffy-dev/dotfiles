@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+xss-lock /home/$USER/.config/script/betterlockscreen.sh  &
+fcitx -d &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+picom --backend glx &
+nitrogen --restore &

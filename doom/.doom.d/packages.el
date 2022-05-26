@@ -51,3 +51,5 @@
 (package! rainbow-mode)
 (package! elcord)
 (package! poly-org)
+(package! ein)
+;;(package! jupyter)
