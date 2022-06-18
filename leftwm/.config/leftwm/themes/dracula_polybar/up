@@ -20,14 +20,10 @@ fi
 #set the theme.toml config
 leftwm-command "LoadTheme $SCRIPTPATH/theme.toml"
 
-#set background
-if [ -x "$(command -v feh)" ]; then
-  feh --bg-scale $SCRIPTPATH/background.jpg
-fi
 
 
 index=0
-monitors="$(polybar -m | sed s/:.*//)"
+monitors="$(polybar -m | sed s/:.*// | tac)"
 leftwm-state -q -n -t $SCRIPTPATH/sizes.liquid | sed -r '/^\s*$/d' | while read -r width x y
 do
   let indextemp=index+1

@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-
+xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal
+xrandr --output HDMI-A-0 --set TearFree on &
+xrandr --output eDP --set TearFree on &
 xss-lock /home/$USER/.config/script/betterlockscreen.sh  &
 fcitx -d &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 picom --backend glx &
 nitrogen --restore &
+numlockx on

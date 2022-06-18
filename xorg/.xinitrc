@@ -1,7 +1,5 @@
 #!/bin/sh
 
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
 xset +fp /home/mrfluffy/.local/share/fonts
 xset fp rehash
 anamnesis --start
@@ -12,6 +10,11 @@ xrandr --output HDMI-A-0 --set TearFree on &
 xrandr --output eDP --set TearFree on &
 #exec /home/mrfluffy/.local/bin/xmonad
 #exec qtile start
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
+source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
+#mkdir -p "$HOME"/.local/share/keyrings
+
 exec dbus-launch leftwm
 #-----------------------------------------------------
 #gome session

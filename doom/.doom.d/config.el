@@ -47,8 +47,6 @@
   '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
   '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
 )
-(require 'elcord)
-(elcord-mode)
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -57,6 +55,22 @@
    (python . t)
    (jupyter . t)))
 
+;; accept completion from copilot and fallback to company
+(defun my-tab ()
+  (interactive)
+  (or (copilot-accept-completion)
+      (company-indent-or-complete-common nil)))
+
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (("C-TAB" . 'copilot-accept-completion-by-word)
+         ("C-<tab>" . 'copilot-accept-completion-by-word)
+         :map company-active-map
+         ("<tab>" . 'my-tab)
+         ("TAB" . 'my-tab)
+         :map company-mode-map
+         ("<tab>" . 'my-tab)
+         ("TAB" . 'my-tab)))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one

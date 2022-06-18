@@ -49,7 +49,8 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! rainbow-mode)
-(package! elcord)
 (package! poly-org)
 (package! ein)
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
 ;;(package! jupyter)
