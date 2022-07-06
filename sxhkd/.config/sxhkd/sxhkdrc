@@ -1,0 +1,35 @@
+Print
+  flameshot gui
+
+alt + d
+  rofi -no-lazy-greb -show drun -icon-theme 'Papirus' -show-icons
+
+alt + Return
+  alacritty
+
+alt + b
+  qutebrowser
+
+suepr + l
+  betterlockscreen -l
+
+alt + f
+  pcmanfm
+
+XF86AudioRaiseVolume
+  pamixer --allow-boost -i 5
+
+XF86AudioLowerVolume
+  pamixer --allow-boost -d 5
+
+XF86AudioMute
+  pamixer -t
+
+XF86AudioPlay
+  playerctl play-pause
+
+XF86AudioPrev
+  playerctl previous
+
+XF86AudioNext
+  playerctl next

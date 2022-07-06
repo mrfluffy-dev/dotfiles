@@ -37,7 +37,8 @@ impl<X: XConn> Hook<X> for StartupHook {
         };
         spawn!("xss-lock /home/$USER/.config/scripts/betterlockscreen.sh");
         spawn!("picom --backend glx");
-        spawn!("nitrogen --restore")
+        spawn!("nitrogen --restore");
+        spawn!("sxhkd")
     }
 }
 
@@ -98,10 +99,6 @@ fn main() -> penrose::Result<()> {
     )]);
     let config = config_builder.build().unwrap();
     let key_bindings = gen_keybindings! {
-        // Program launchers
-        "A-d" => run_external!(LAUNCHER);
-        "A-Return" => run_external!(TERMINAL);
-
         // Exit Penrose (important to remember this one!)
         "A-S-q" => run_internal!(exit);
 
@@ -110,7 +107,7 @@ fn main() -> penrose::Result<()> {
         "A-k" => run_internal!(cycle_client, Backward);
         "A-S-j" => run_internal!(drag_client, Forward);
         "A-S-k" => run_internal!(drag_client, Backward);
-        "A-t" => run_internal!(toggle_client_fullscreen, &Selector::Focused);
+        "A-S-t" => run_internal!(toggle_client_fullscreen, &Selector::Focused);
         "A-q" => run_internal!(kill_client);
 
         // workspace management
@@ -130,26 +127,7 @@ fn main() -> penrose::Result<()> {
         "A-S-h" => run_internal!(update_main_ratio, More);
         "A-S-l" => run_internal!(update_main_ratio, Less);
 
-
         "A-backslash" => sp.toggle();
-
-        //print screen
-        "A-p" => run_external!("flameshot gui");
-
-        //controll audio
-        "XF86AudioMute" => run_external!("pamixer -t");
-        "XF86AudioLowerVolume" => run_external!("pamixer --allow-boost -d 5");
-        "XF86AudioRaiseVolume" => run_external!("pamixer --allow-boost -i 5");
-        "XF86AudioPlay" => run_external!("playerctl play-pause");
-        "XF86AudioNext" => run_external!("playerctl next");
-        "XF86AudioPrev" => run_external!("playerctl previous");
-        "XF86AudioStop" => run_external!("playerctl stop");
-
-        //my own keybindings
-        "A-f" => run_external!("pcmanfm");
-        "A-b" => focus_or_spawn("qutebrowser","qutebrowser");
-        "M-l" => run_external!("betterlockscreen -l");
-
 
         map: { "1", "2", "3", "4", "5", "6", "7", "8", "9" } to index_selectors(9) => {
             "A-{}" => focus_workspace (REF);
