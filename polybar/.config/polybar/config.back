@@ -1,0 +1,209 @@
+[colors]
+background = #282a36
+foreground = #f8f8f2
+background-alt = #99444444
+foreground-alt = #2a2a2a
+primary = #6e5991
+secondary = #363949
+alert = #FF0000
+
+[bar/MainWithTray]
+width = ${env:width}
+offset-x = ${env:offsetx}
+monitor = HDMI-A-0
+monitor-fallback =eDP
+height = 27
+fixed-center = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-size = 3
+line-color = #f00
+border-size = 0
+border-color = #00000000
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+font-0 = Ubuntu:size=11;2
+font-1 = Iosevka:size=20;3
+font-2 = FontAwesome:style=Regular:pixelsize=11;1
+font-3 = FontAwesome:style=Solid:pixelsize=11;1
+font-4 = FontAwesome:pixelsize=11;1
+font-5 = siji:pixelsize=10;1
+font-6 = Source Han Sans JP:pixelsize=11;1
+label-font =
+modules-left = ewmh
+modules-center = date
+modules-right = filesystem wlan pkgupdates-available pulseaudio memory cpu battery
+tray-position = right
+tray-padding = 2
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/SeconderyWitNoTray]
+width = ${env:width}
+offset-x = ${env:offsetx}
+monitor = eDP
+height = 27
+fixed-center = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-size = 3
+line-color = #f00
+border-size = 0
+border-color = #00000000
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+font-0 = Ubuntu:size=11;2
+font-1 = Iosevka:size=20;3
+font-2 = Font Awesome 5 Free:style=Regular:pixelsize=11;1
+font-3 = Font Awesome 5 Free:style=Solid:pixelsize=11;1
+font-4 = Font Awesome 5 Brands:pixelsize=11;1
+font-5 = siji:pixelsize=10;1
+font-6 = Source Han Sans JP:pixelsize=13;1
+label-font =
+modules-left = ewmh
+modules-center = date
+modules-right = filesystem wlan pulseaudio memory cpu battery
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/ewmh]
+type = internal/xworkspaces
+pin-workspaces = false
+enable-click = true
+enable-scroll = false
+icon-0 = 1;一
+icon-1 = 2;二
+icon-2 = 3;三
+icon-3 = 4;四
+icon-4 = 5;五
+icon-5 = 6;六
+icon-6 = 7;七
+icon-7 = 8;八
+icon-8 = 9;九
+format = <label-state>
+label-active = %icon%
+label-active-foreground = ${colors.green}
+label-active-background =  #6e5991
+label-active-padding = 1
+label-occupied = %icon%
+label-occupied-foreground = ${colors.blue}
+label-occupied-background = #363949
+label-occupied-padding = 1
+label-urgent = %icon%
+label-urgent-foreground = ${colors.red}
+label-urgent-underline = #0000ff
+label-urgent-padding = 1
+label-empty = %icon%
+label-empty-foreground = ${colors.fg}
+label-empty-underline = ${colors.cyan}
+label-empty-padding = 1
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+mount-0 = /home
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+label = CPU %percentage:2%%
+
+[module/memory]
+type = custom/script
+exec = free | grep Mem | awk '{print int($3/$2 * 100.0)}'
+format-prefix = " MEM "
+format-suffix = "%"
+internal = 3
+click-left = kitty -e btop
+
+[module/wlan]
+type = internal/network
+interface = wlan0
+interval = 3.0
+format-connected = <label-connected>
+label-connected = %%signal% %essid%
+format-disconnected =
+ramp-signal-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+date = %a %d,%b %Y
+time = %I:%M %p
+label = %date%  %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL %percentage%%
+label-volume-foreground = ${root.foreground}
+label-muted =  muted
+label-muted-foreground = #666
+bar-volume-width = 1
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator =  
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+label-charging =  %percentage%%
+label-discharging =  %percentage%%
+format-charging = <animation-charging> <label-charging>
+format-discharging =<animation-discharging> <label-discharging>
+format-full-prefix = " "
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 950
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+animation-discharging-framerate = 950
+
+[module/kdeconnect]
+type = custom/script  
+exec = "/home/mrfluffy/.config/script/polybar-kdeconnect.sh -d"  
+tail = true
+
+[module/pkgupdates-available]
+type = custom/script
+exec = /home/mrfluffy/.config/script/updateCount.sh
+interval = 3600
+click-left = kitty paru
+
+[module/light]
+type = custom/script
+exec = light -G | awk '{print int($float)}'
+interval = 50
+format-prefix = " LIGHT "
+scroll-up = light -A 5
+scroll-down = light -U 5

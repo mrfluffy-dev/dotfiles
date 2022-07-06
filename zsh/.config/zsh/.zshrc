@@ -34,6 +34,8 @@ alias hentai="~/repos/and-scripts/fap-cli"
 alias manga="manga-cli"
 alias yt="~/repos/ytfzf/ytfzf  --thumb-viewer='kitty' -t"
 alias cd="z"
+alias rm="rip"
+alias time="hyperfine"
 
 #home clean up
 export ANDROID_HOME="$XDG_DATA_HOME"/android

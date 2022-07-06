@@ -15,7 +15,9 @@ export SSH_AUTH_SOCK
 source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 #mkdir -p "$HOME"/.local/share/keyrings
 
-exec dbus-launch leftwm
+#exec dbus-launch leftwm
+#polybar barbase &
+/home/mrfluffy/.config/penrose/target/release/penrose &> ~/.penrose.log
 #-----------------------------------------------------
 #gome session
 #export XDG_SESSION_TYPE=x11
