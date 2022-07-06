@@ -1,9 +1,11 @@
 #[macro_use]
 extern crate penrose;
+use std::thread::sleep;
+use std::time::Duration;
 
 use penrose::{
     contrib::{
-        actions::{focus_or_spawn, update_monitors_via_xrandr},
+        actions::{update_monitors_via_xrandr},
         extensions::Scratchpad,
     },
     core::{
@@ -24,7 +26,6 @@ use simplelog::{LevelFilter, SimpleLogger};
 
 // Replace these with your preferred terminal and program launcher
 const TERMINAL: &str = "alacritty";
-const LAUNCHER: &str = "rofi -no-lazy-greb -show drun -icon-theme 'Papirus' -show-icons";
 
 struct StartupHook {}
 impl<X: XConn> Hook<X> for StartupHook {
@@ -50,7 +51,11 @@ where
     fn randr_notify(&mut self, wm: &mut WindowManager<X>) -> Result<()> {
         update_monitors_via_xrandr("HDMI-A-0", "eDP", RelativePosition::Left);
         if wm.n_screens() != 1 {
-            spawn!("polybar --reload barbase1")
+            spawn!("killall polybar");
+            let three_seconds = Duration::from_secs(1);
+            sleep(three_seconds);
+            spawn!("polybar --reload barbase1");
+            spawn!("polybar --reload barbase2")
         } else {
             spawn!("echo 'Only one screen connected'")
         }
@@ -90,13 +95,14 @@ fn main() -> penrose::Result<()> {
     // Default percentage of the screen to fill with the main area of the layout
     let ratio = 0.5;
 
-    config_builder.layouts(vec![Layout::new(
+    config_builder.layouts(vec![
+        Layout::new(
         "[side]",
         LayoutConf::default(),
         side_stack,
         n_main,
-        ratio,
-    )]);
+        ratio,),
+    ]);
     let config = config_builder.build().unwrap();
     let key_bindings = gen_keybindings! {
         // Exit Penrose (important to remember this one!)
@@ -134,7 +140,6 @@ fn main() -> penrose::Result<()> {
             "A-S-{}" => client_to_workspace (REF);
         };
     };
-
     let conn = XcbConnection::new()?;
 
     let mut wm = WindowManager::new(config, conn, hooks, logging_error_handler());
