@@ -75,11 +75,11 @@ fn main() -> penrose::Result<()> {
     config_builder
         .workspaces(vec!["1", "2", "3", "4", "5", "6", "7", "8", "9"])
         // Windows with a matching WM_CLASS will always float
-        .floating_classes(vec!["dmenu", "dunst", "polybar"])
+        .floating_classes(vec!["polybar"])
         // Client border colors are set based on X focus
         .focused_border("#8218c4")?
         .unfocused_border("#1A1A1A")?
-        .gap_px(0)
+        .gap_px(5)
         .top_bar(true)
         .bar_height(32);
 
