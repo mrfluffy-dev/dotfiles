@@ -3,14 +3,14 @@ extern crate penrose;
 
 use penrose::{
     contrib::{
-        actions::{focus_or_spawn,update_monitors_via_xrandr},
+        actions::{focus_or_spawn, update_monitors_via_xrandr},
         extensions::Scratchpad,
     },
     core::{
         config::Config,
+        data_types::RelativePosition,
         helpers::index_selectors,
         hooks::Hook,
-        data_types::{Region,RelativePosition},
         layout::{side_stack, Layout, LayoutConf},
         manager::WindowManager,
         xconnection::XConn,
@@ -31,8 +31,7 @@ impl<X: XConn> Hook<X> for StartupHook {
     fn startup(&mut self, wm: &mut WindowManager<X>) -> Result<()> {
         if wm.n_screens() == 1 {
             spawn!("polybar --reload barbase2")
-        }
-        else {
+        } else {
             spawn!("polybar --reload barbase1");
             spawn!("polybar --reload barbase2")
         };
@@ -41,7 +40,6 @@ impl<X: XConn> Hook<X> for StartupHook {
         spawn!("nitrogen --restore")
     }
 }
-
 
 struct Monitors {}
 impl<X> Hook<X> for Monitors
@@ -52,15 +50,11 @@ where
         update_monitors_via_xrandr("HDMI-A-0", "eDP", RelativePosition::Left);
         if wm.n_screens() != 1 {
             spawn!("polybar --reload barbase1")
-        }
-        else {
+        } else {
             spawn!("echo 'Only one screen connected'")
         }
     }
 }
-
-
-
 
 fn main() -> penrose::Result<()> {
     // Initialise the logger (use LevelFilter::Debug to enable debug logging)
@@ -75,9 +69,6 @@ fn main() -> penrose::Result<()> {
         Box::new(Monitors {}),
         sp.get_hook(),
     ];
-
-
-
 
     // Created at startup. See keybindings below for how to access them
     let mut config_builder = Config::default().builder();
@@ -119,7 +110,7 @@ fn main() -> penrose::Result<()> {
         "A-k" => run_internal!(cycle_client, Backward);
         "A-S-j" => run_internal!(drag_client, Forward);
         "A-S-k" => run_internal!(drag_client, Backward);
-        "A-S-f" => run_internal!(toggle_client_fullscreen, &Selector::Focused);
+        "A-t" => run_internal!(toggle_client_fullscreen, &Selector::Focused);
         "A-q" => run_internal!(kill_client);
 
         // workspace management
