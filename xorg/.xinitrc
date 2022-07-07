@@ -17,7 +17,7 @@ source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
 #exec dbus-launch leftwm
 #polybar barbase &
-/home/mrfluffy/.config/penrose/target/release/penrose &> ~/.penrose.log
+/home/mrfluffy/.config/hentaiwm/target/release/hentaiwm &> ~/.penrose.log
 #-----------------------------------------------------
 #gome session
 #export XDG_SESSION_TYPE=x11
