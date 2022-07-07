@@ -4,10 +4,7 @@ use std::thread::sleep;
 use std::time::Duration;
 
 use penrose::{
-    contrib::{
-        actions::{update_monitors_via_xrandr},
-        extensions::Scratchpad,
-    },
+    contrib::{actions::update_monitors_via_xrandr, extensions::Scratchpad},
     core::{
         config::Config,
         data_types::RelativePosition,
@@ -15,11 +12,12 @@ use penrose::{
         hooks::Hook,
         layout::{side_stack, Layout, LayoutConf},
         manager::WindowManager,
-        xconnection::XConn,
+        ring::Selector,
+        xconnection::{XConn},
     },
     logging_error_handler, spawn,
     xcb::{XcbConnection, XcbHooks},
-    Backward, Forward, Less, More, Result, Selector,
+    Backward, Forward, Less, More, Result,
 };
 
 use simplelog::{LevelFilter, SimpleLogger};
@@ -35,9 +33,9 @@ impl<X: XConn> Hook<X> for StartupHook {
         } else {
             spawn!("polybar --reload barbase1").unwrap();
             spawn!("polybar --reload barbase2")
-        }.unwrap();
-        spawn!("xss-lock /home/$USER/.config/scripts/betterlockscreen.sh")
-            .unwrap();
+        }
+        .unwrap();
+        spawn!("xss-lock /home/$USER/.config/scripts/betterlockscreen.sh").unwrap();
         spawn!("picom --backend glx").unwrap();
         spawn!("nitrogen --restore").unwrap();
         spawn!("sxhkd")
@@ -53,7 +51,7 @@ where
         update_monitors_via_xrandr("HDMI-A-0", "eDP", RelativePosition::Left).unwrap();
         if wm.n_screens() != 1 {
             spawn!("killall polybar").unwrap();
-            let three_seconds = Duration::from_secs(1);
+            let three_seconds = Duration::from_millis(500);
             sleep(three_seconds);
             spawn!("polybar --reload barbase1").unwrap();
             spawn!("polybar --reload barbase2")
@@ -96,14 +94,13 @@ fn main() -> penrose::Result<()> {
     // Default percentage of the screen to fill with the main area of the layout
     let ratio = 0.5;
 
-    config_builder.layouts(vec![
-        Layout::new(
+    config_builder.layouts(vec![Layout::new(
         "[side]",
         LayoutConf::default(),
         side_stack,
         n_main,
-        ratio,),
-    ]);
+        ratio,
+    )]);
     let config = config_builder.build().unwrap();
     let key_bindings = gen_keybindings! {
         // Exit Penrose (important to remember this one!)
