@@ -33,12 +33,13 @@ impl<X: XConn> Hook<X> for StartupHook {
         if wm.n_screens() == 1 {
             spawn!("polybar --reload barbase2")
         } else {
-            spawn!("polybar --reload barbase1");
+            spawn!("polybar --reload barbase1").unwrap();
             spawn!("polybar --reload barbase2")
-        };
-        spawn!("xss-lock /home/$USER/.config/scripts/betterlockscreen.sh");
-        spawn!("picom --backend glx");
-        spawn!("nitrogen --restore");
+        }.unwrap();
+        spawn!("xss-lock /home/$USER/.config/scripts/betterlockscreen.sh")
+            .unwrap();
+        spawn!("picom --backend glx").unwrap();
+        spawn!("nitrogen --restore").unwrap();
         spawn!("sxhkd")
     }
 }
@@ -49,12 +50,12 @@ where
     X: XConn,
 {
     fn randr_notify(&mut self, wm: &mut WindowManager<X>) -> Result<()> {
-        update_monitors_via_xrandr("HDMI-A-0", "eDP", RelativePosition::Left);
+        update_monitors_via_xrandr("HDMI-A-0", "eDP", RelativePosition::Left).unwrap();
         if wm.n_screens() != 1 {
-            spawn!("killall polybar");
+            spawn!("killall polybar").unwrap();
             let three_seconds = Duration::from_secs(1);
             sleep(three_seconds);
-            spawn!("polybar --reload barbase1");
+            spawn!("polybar --reload barbase1").unwrap();
             spawn!("polybar --reload barbase2")
         } else {
             spawn!("echo 'Only one screen connected'")
