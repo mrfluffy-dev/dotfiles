@@ -330,6 +330,8 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+interval = 1
+
 
 [module/alsa]
 type = internal/alsa

@@ -17,10 +17,10 @@ alt + f
   pcmanfm
 
 XF86AudioRaiseVolume
-  pamixer --allow-boost -i 5
+  pamixer --allow-boost -i 1
 
 XF86AudioLowerVolume
-  pamixer --allow-boost -d 5
+  pamixer --allow-boost -d 1
 
 XF86AudioMute
   pamixer -t
