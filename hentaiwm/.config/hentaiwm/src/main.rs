@@ -13,7 +13,7 @@ use penrose::{
         layout::{side_stack, Layout, LayoutConf},
         manager::WindowManager,
         ring::Selector,
-        xconnection::{XConn},
+        xconnection::XConn,
     },
     logging_error_handler, spawn,
     xcb::{XcbConnection, XcbHooks},
@@ -35,7 +35,8 @@ impl<X: XConn> Hook<X> for StartupHook {
             spawn!("polybar --reload barbase2")
         }
         .unwrap();
-        spawn!("xss-lock /home/$USER/.config/scripts/betterlockscreen.sh").unwrap();
+        spawn!("sh /home/mrfluffy/.config/script/autostart.sh").unwrap();
+        spawn!("xss-lock -- /home/mrfluffy/.config/script/betterlockscreen.sh").unwrap();
         spawn!("picom --backend glx").unwrap();
         spawn!("nitrogen --restore").unwrap();
         spawn!("sxhkd")
