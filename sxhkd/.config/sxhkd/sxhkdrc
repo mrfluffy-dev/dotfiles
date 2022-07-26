@@ -37,4 +37,5 @@ XF86AudioPrev
 XF86AudioNext
   playerctl next
 
-
+alt + o
+  rofimoji
