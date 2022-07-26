@@ -39,6 +39,17 @@
       doom-variable-pitch-font (font-spec :family "Ubuntu Mono" :size 15)
       doom-big-font (font-spec :family "Ubuntu Mono" :size 24))
 
+(require 'whitespace)
+(setq whitespace-line-column 99)
+(setq whitespace-style '(face lines-tail))
+(add-hook 'prog-mode-hook 'whitespace-mode)
+
+(require 'fill-column-indicator)
+(setq fci-rule-column 99)
+(setq fci-rule-width 1)
+(setq fci-rule-color "#a280d5")
+(add-hook 'prog-mode-hook 'fci-mode)
+
 
 (custom-set-faces
   '(org-level-1 ((t (:inherit outline-1 :height 1.4))))
