@@ -16,6 +16,9 @@ super + l
 alt + f
   pcmanfm
 
+alt + e
+  emacs
+
 XF86AudioRaiseVolume
   pamixer --allow-boost -i 1
 
@@ -33,3 +36,5 @@ XF86AudioPrev
 
 XF86AudioNext
   playerctl next
+
+
