@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 xset +fp /home/mrfluffy/.local/share/fonts
 xset fp rehash
