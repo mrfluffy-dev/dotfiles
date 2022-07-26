@@ -35,10 +35,11 @@ alias manga="manga-cli"
 alias yt="~/repos/ytfzf/ytfzf  --thumb-viewer='kitty' -t"
 alias cd="z"
 alias rm="rip"
-alias time="hyperfine"\
+alias time="hyperfine"
 alias kami="~/Documents/Rust/kami/target/release/kami"
 alias calc="cpc"
 #home clean up
+export EDITOR="lvim" 
 export ANDROID_HOME="$XDG_DATA_HOME"/android
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
