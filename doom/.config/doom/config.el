@@ -50,7 +50,6 @@
 (setq fci-rule-color "#a280d5")
 (add-hook 'prog-mode-hook 'fci-mode)
 
-
 (custom-set-faces
   '(org-level-1 ((t (:inherit outline-1 :height 1.4))))
   '(org-level-2 ((t (:inherit outline-2 :height 1.3))))
