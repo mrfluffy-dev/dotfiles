@@ -29,10 +29,9 @@ struct StartupHook {}
 impl<X: XConn> Hook<X> for StartupHook {
     fn startup(&mut self, wm: &mut WindowManager<X>) -> Result<()> {
         if wm.n_screens() == 1 {
-            spawn!("polybar --reload barbase2")
+            spawn!("eww -c /home/mrfluffy/.config/eww/bar open-many bar")
         } else {
-            spawn!("polybar --reload barbase1").unwrap();
-            spawn!("polybar --reload barbase2")
+            spawn!("eww -c /home/mrfluffy/.config/eww/bar open-many bar bar_1")
         }
         .unwrap();
         spawn!("sh /home/mrfluffy/.config/script/autostart.sh").unwrap();
@@ -51,11 +50,10 @@ where
     fn randr_notify(&mut self, wm: &mut WindowManager<X>) -> Result<()> {
         update_monitors_via_xrandr("HDMI-A-0", "eDP", RelativePosition::Left).unwrap();
         if wm.n_screens() != 1 {
-            spawn!("killall polybar").unwrap();
+            spawn!("killall eww").unwrap();
             let three_seconds = Duration::from_millis(500);
             sleep(three_seconds);
-            spawn!("polybar --reload barbase1").unwrap();
-            spawn!("polybar --reload barbase2")
+            spawn!("eww -c /home/mrfluffy/.config/eww/bar open-many bar bar_1")
         } else {
             spawn!("echo 'Only one screen connected'")
         }
