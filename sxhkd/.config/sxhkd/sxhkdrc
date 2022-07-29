@@ -39,3 +39,6 @@ XF86AudioNext
 
 alt + o
   rofimoji
+
+alt + a
+  $HOME/.config/script/animemode.sh

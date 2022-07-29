@@ -17,6 +17,7 @@ export FZF_DEFAULT_OPTS='--height 30% --reverse'
 export FZF_CTRL_R_OPTS='--sort'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export NIX_PATH="$HOME/.nix-defexpr/"
+export TERMINAL="alacritty"
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
