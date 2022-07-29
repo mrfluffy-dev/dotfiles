@@ -48,6 +48,7 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+(package! elcord)
 (package! fill-column-indicator)
 (package! rainbow-mode)
 (package! poly-org)

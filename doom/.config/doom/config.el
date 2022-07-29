@@ -71,6 +71,9 @@
   (or (copilot-accept-completion)
       (company-indent-or-complete-common nil)))
 
+(require 'elcord)
+(elcord-mode)
+
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
   :bind (("C-TAB" . 'copilot-accept-completion-by-word)
