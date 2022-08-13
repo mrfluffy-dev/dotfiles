@@ -20,6 +20,7 @@ export NIX_PATH="$HOME/.nix-defexpr/"
 export TERMINAL="alacritty"
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
+autoload -U compinit && compinit -u
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
@@ -39,6 +40,7 @@ alias rm="rip"
 alias time="hyperfine"
 alias kami="~/Documents/Rust/kami/target/release/kami"
 alias calc="cpc"
+alias pdf="mupdf"
 #home clean up
 export EDITOR="lvim" 
 export ANDROID_HOME="$XDG_DATA_HOME"/android

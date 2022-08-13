@@ -23,21 +23,23 @@ use penrose::{
 use simplelog::{LevelFilter, SimpleLogger};
 
 // Replace these with your preferred terminal and program launcher
-const TERMINAL: &str = "alacritty";
+const TERMINAL: &str = "kitty";
 
 struct StartupHook {}
 impl<X: XConn> Hook<X> for StartupHook {
     fn startup(&mut self, wm: &mut WindowManager<X>) -> Result<()> {
         if wm.n_screens() == 1 {
-            spawn!("eww -c /home/mrfluffy/.config/eww/bar open-many bar")
+            spawn!("polybar barbase1")
         } else {
-            spawn!("eww -c /home/mrfluffy/.config/eww/bar open-many bar bar_1")
+            spawn!("polybar barbase1").unwrap();
+            spawn!("polybar barbase2")
         }
         .unwrap();
         spawn!("sh /home/mrfluffy/.config/script/autostart.sh").unwrap();
         spawn!("xss-lock -- /home/mrfluffy/.config/script/betterlockscreen.sh").unwrap();
         spawn!("picom --backend glx").unwrap();
         spawn!("nitrogen --restore").unwrap();
+        spawn!("fcitx5 -d").unwrap();
         spawn!("sxhkd")
     }
 }
@@ -50,12 +52,13 @@ where
     fn randr_notify(&mut self, wm: &mut WindowManager<X>) -> Result<()> {
         update_monitors_via_xrandr("HDMI-A-0", "eDP", RelativePosition::Left).unwrap();
         if wm.n_screens() != 1 {
-            spawn!("killall eww").unwrap();
+            spawn!("killall polybar").unwrap();
             let three_seconds = Duration::from_millis(500);
             sleep(three_seconds);
-            spawn!("eww -c /home/mrfluffy/.config/eww/bar open-many bar bar_1")
+            spawn!("polybar barbase1").unwrap();
+            spawn!("polybar barbase2")
         } else {
-            spawn!("echo 'Only one screen connected'")
+            spawn!("polybar barbase1")
         }
     }
 }
@@ -85,7 +88,7 @@ fn main() -> penrose::Result<()> {
         .unfocused_border("#1A1A1A")?
         .gap_px(5)
         .top_bar(true)
-        .bar_height(32);
+        .bar_height(25);
 
     // Default number of clients in the main layout area
     let n_main = 1;

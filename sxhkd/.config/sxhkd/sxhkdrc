@@ -5,7 +5,7 @@ alt + d
   rofi -no-lazy-greb -show drun -icon-theme 'Papirus' -show-icons
 
 alt + Return
-  alacritty
+  kitty
 
 alt + b
   qutebrowser
@@ -41,4 +41,4 @@ alt + o
   rofimoji
 
 alt + a
-  $HOME/.config/script/animemode.sh
+  kitty -e $HOME/Documents/Rust/kami/target/release/kami -a

@@ -35,9 +35,11 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type `relative)
 
-(setq doom-font (font-spec :family "Ubuntu Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Mono" :size 15)
-      doom-big-font (font-spec :family "Ubuntu Mono" :size 24))
+(set-fontset-font "fontset-default" nil (font-spec :size 15 :name "Meterial Icons"))
+
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 15)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 15)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 24))
 
 (require 'whitespace)
 (setq whitespace-line-column 99)
