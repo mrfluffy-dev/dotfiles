@@ -4,13 +4,13 @@ HISTSIZE=3000
 SAVEHIST=3000
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey -v
-autoload -U promptinit; promptinit
-prompt spaceship
+source ~/.zsh/spaceship/spaceship.zsh
 export PATH=$HOME/.local/bin/genymotion:$HOME/bin:/usr/local/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DOWNLOAD_DIR="$HOME/Downloads"
 export NIX_PATH="$HOME/.nix-defexpr/channels"
 export FZF_DEFAULT_COMMAND="rg ~ --files --hidden"
 export FZF_DEFAULT_OPTS='--height 30% --reverse'
@@ -18,6 +18,7 @@ export FZF_CTRL_R_OPTS='--sort'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export NIX_PATH="$HOME/.nix-defexpr/"
 export TERMINAL="alacritty"
+export LIBVIRT_DEFAULT_URI="qemu:///system"
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 autoload -U compinit && compinit -u

@@ -70,11 +70,17 @@ fn main() -> penrose::Result<()> {
     };
 
     let sp = Scratchpad::new(TERMINAL, 0.8, 0.8);
+    let anime = Scratchpad::new(
+        "kitty /home/mrfluffy/Documents/Rust/kami/target/release/kami -a",
+        0.8,
+        0.8,
+    );
 
     let hooks: XcbHooks = vec![
         Box::new(StartupHook {}),
         Box::new(Monitors {}),
         sp.get_hook(),
+        anime.get_hook(),
     ];
 
     // Created at startup. See keybindings below for how to access them
@@ -134,6 +140,7 @@ fn main() -> penrose::Result<()> {
         "A-S-l" => run_internal!(update_main_ratio, Less);
 
         "A-backslash" => sp.toggle();
+        "A-a" => anime.toggle();
 
         map: { "1", "2", "3", "4", "5", "6", "7", "8", "9" } to index_selectors(9) => {
             "A-{}" => focus_workspace (REF);

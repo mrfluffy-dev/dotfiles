@@ -40,5 +40,3 @@ XF86AudioNext
 alt + o
   rofimoji
 
-alt + a
-  kitty -e $HOME/Documents/Rust/kami/target/release/kami -a
