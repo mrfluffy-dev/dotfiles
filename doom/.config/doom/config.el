@@ -37,9 +37,9 @@
 
 (set-fontset-font "fontset-default" nil (font-spec :size 15 :name "Meterial Icons"))
 
-(setq doom-font (font-spec :family "UbuntuMono" :size 15)
-      doom-variable-pitch-font (font-spec :family "UbuntuMono" :size 15)
-      doom-big-font (font-spec :family "UbuntuMono" :size 24))
+(setq doom-font (font-spec :family "Monocraft" :size 15)
+      doom-variable-pitch-font (font-spec :family "Monocraft" :size 15)
+      doom-big-font (font-spec :family "Monocraft" :size 24))
 
 (require 'whitespace)
 (setq whitespace-line-column 99)
