@@ -23,7 +23,7 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 
 padding-left = 0
-padding-right = 1
+padding-right = 0
 
 module-margin-left = 0
 module-margin-right = 0

@@ -1,4 +1,4 @@
-#files: 831	version: 5.9
+#files: 811	version: 5.9
 
 _comps=(
 '-' '_precommand'
@@ -24,6 +24,7 @@ _comps=(
 'add-zle-hook-widget' '_add-zle-hook-widget'
 'add-zsh-hook' '_add-zsh-hook'
 'admin' '_sccs'
+'alacritty' '_alacritty'
 'ali' '_mh'
 'alias' '_alias'
 'amaya' '_webbrowser'
@@ -134,7 +135,6 @@ _comps=(
 'cabal' '_cabal'
 'cal' '_cal'
 'calendar' '_calendar'
-'cargo' '_cargo'
 'cat' '_cat'
 'catchsegv' '_precommand'
 'cc' '_gcc'
@@ -152,7 +152,6 @@ _comps=(
 'chattr' '_chattr'
 'chcon' '_chcon'
 'chdir' '_cd'
-'checkupdates' '_checkupdates'
 'chfn' '_users'
 'chgrp' '_chown'
 'chimera' '_webbrowser'
@@ -179,6 +178,7 @@ _comps=(
 'cmp' '_cmp'
 'co' '_rcs'
 'code' '_code'
+'code-oss' '_code-oss'
 'column' '_column'
 'comb' '_sccs'
 'combine' '_imagemagick'
@@ -324,7 +324,6 @@ _comps=(
 'fc' '_fc'
 'fc-list' '_xft_fonts'
 'fc-match' '_xft_fonts'
-'fd' '_fd'
 'feh' '_feh'
 'fetchmail' '_fetchmail'
 'ffmpeg' '_ffmpeg'
@@ -424,6 +423,7 @@ _comps=(
 'ggetopt' '_getopt'
 'ggrep' '_grep'
 'ggv' '_gnome-gv'
+'ghcup' '_ghcup'
 'ghead' '_head'
 'ghostscript' '_ghostscript'
 'ghostview' '_pspdf'
@@ -877,22 +877,14 @@ _comps=(
 'p4' '_perforce'
 'p4d' '_perforce'
 'pacat' '_pulseaudio'
-'paccache' '_paccache'
-'pacdiff' '_pacdiff'
 'pack' '_pack'
 'packf' '_mh'
-'paclist' '_paclist'
-'paclog-pkglist' '_paclog-pkglist'
 'pacman' '_pacman'
 'pacman-conf' '_pacman'
 'pacman-key' '_pacman'
 'pacman.static' '_pacman'
 'pacmd' '_pulseaudio'
-'pacscripts' '_pacscripts'
-'pacsearch' '_pacsearch'
-'pacsort' '_pacsort'
 'pactl' '_pulseaudio'
-'pactree' '_pactree'
 'padsp' '_pulseaudio'
 'pandoc' '_pandoc'
 'paplay' '_pulseaudio'
@@ -952,7 +944,6 @@ _comps=(
 'pkginfo' '_pkginfo'
 'pkgrm' '_pkgrm'
 'pkill' '_pgrep'
-'playerctl' '_playerctl'
 'pldd' '_pids'
 'pmake' '_make'
 'pman' '_perl_modules'
@@ -1025,11 +1016,9 @@ _comps=(
 'pyhtmlizer' '_twisted'
 'qdbus' '_qdbus'
 'qiv' '_qiv'
-'qpdf' '_qpdf'
 'quilt' '_quilt'
 'r' '_fc'
 'rake' '_rake'
-'rankmirrors' '_rankmirrors'
 'ranlib' '_ranlib'
 'rar' '_rar'
 'rc' '_sh'
@@ -1071,7 +1060,6 @@ _comps=(
 'rgview' '_vim'
 'rgvim' '_vim'
 'ri' '_ri'
-'riverctl' '_riverctl'
 'rlogin' '_rlogin'
 'rm' '_rm'
 'rmd160' '_cksum'
@@ -1096,7 +1084,6 @@ _comps=(
 'run-help' '_run-help'
 'rup' '_hosts'
 'rusage' '_precommand'
-'rustup' '_rustup'
 'rview' '_vim'
 'rvim' '_vim'
 'rwho' '_hosts'
@@ -1186,7 +1173,6 @@ _comps=(
 'ssh-keygen' '_ssh'
 'ssh-keyscan' '_ssh'
 'star' '_tar'
-'starship' '_starship'
 'start' '_initctl'
 'stat' '_stat'
 'status' '_initctl'
@@ -1216,8 +1202,6 @@ _comps=(
 'svnliteadmin' '_subversion'
 'swaks' '_swaks'
 'swanctl' '_swanctl'
-'swayidle' '_swayidle'
-'swaylock' '_swaylock'
 'swift' '_swift'
 'swiftc' '_swift'
 'sync' '_nothing'
@@ -1338,7 +1322,6 @@ _comps=(
 'unwrapdiff' '_patchutils'
 'unxz' '_xz'
 'unzip' '_zip'
-'updpkgsums' '_updpkgsums'
 'uptime' '_uptime'
 'urxvt' '_urxvt'
 'urxvt256c' '_urxvt'
@@ -1444,8 +1427,6 @@ _comps=(
 'whom' '_mh'
 'wiggle' '_wiggle'
 'wipefs' '_wipefs'
-'wl-copy' '_wl-copy'
-'wl-paste' '_wl-paste'
 'wodim' '_cdrecord'
 'wpa_cli' '_wpa_cli'
 'write' '_users_on'
@@ -1518,7 +1499,6 @@ _comps=(
 'ypxfr' '_yp'
 'ytalk' '_other_accounts'
 'zargs' '_zargs'
-'zathura' '_zathura'
 'zcalc' '_zcalc'
 '-zcalc-line-' '_zcalc_line'
 'zcat' '_zcat'
@@ -1680,20 +1660,16 @@ bindkey '^[,' _history-complete-newer
 bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
-autoload -Uz _bat _bootctl _busctl _bwrap _cargo \
-            _checkupdates _code _coredumpctl _curl _exa \
-            _fd _hostnamectl _journalctl _kernel-install _kitty \
+autoload -Uz _alacritty _bat _bootctl _busctl _bwrap \
+            _code _code-oss _coredumpctl _curl _exa \
+            _ghcup _hostnamectl _journalctl _kernel-install _kitty \
             _libinput _localectl _loginctl _machinectl _mkinitcpio \
-            _mpv _networkctl _oomctl _paccache _pacdiff \
-            _paclist _paclog-pkglist _pacman _pacscripts _pacsearch \
-            _pacsort _pactree _paru _playerctl _polybar \
-            _polybar_msg _pulseaudio _qpdf _rankmirrors _resolvectl \
-            _rg _riverctl _rustup _sd_hosts_or_user_at_host _sd_machines \
-            _sd_outputmodes _sd_unit_files _starship _swayidle _swaylock \
-            _systemctl _systemd _systemd-analyze _systemd-delta _systemd-inhibit \
-            _systemd-nspawn _systemd-path _systemd-run _systemd-tmpfiles _timedatectl \
-            _udevadm _updpkgsums _wl-copy _wl-paste _xss-lock \
-            _zathura _zoxide _cdr _all_labels _all_matches \
+            _mpv _networkctl _oomctl _pacman _paru \
+            _polybar _polybar_msg _pulseaudio _resolvectl _rg \
+            _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes _sd_unit_files _systemctl \
+            _systemd _systemd-analyze _systemd-delta _systemd-inhibit _systemd-nspawn \
+            _systemd-path _systemd-run _systemd-tmpfiles _timedatectl _udevadm \
+            _xss-lock _zoxide _cdr _all_labels _all_matches \
             _alternative _approximate _arg_compile _arguments _bash_completions \
             _cache_invalid _call_function _combination _complete _complete_debug \
             _complete_help _complete_help_generic _complete_tag _comp_locale _correct \
