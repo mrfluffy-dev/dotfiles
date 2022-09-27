@@ -1,0 +1,4 @@
+#!/bin/sh
+gsettings set org.gnome.desktop.interface gtk-theme 'gtk-master'
+gsettings set org.gnome.desktop.interface icon-theme 'Dracula'
+gsettings set org.gnome.desktop.interface cursor-theme 'Simp1e'

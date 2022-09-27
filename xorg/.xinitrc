@@ -15,7 +15,7 @@ mkdir -p "$HOME"/.local/share/keyrings
 
 #exec dbus-launch leftwm
 #polybar barbase &
-
+#exec qtile start
 exec /home/mrfluffy/.local/bin/xmonad
 #/home/mrfluffy/.config/hentaiwm/target/release/hentaiwm &> ~/.penrose.log
 #-----------------------------------------------------

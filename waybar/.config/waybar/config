@@ -5,7 +5,7 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["river/tags", "custom/media"],
+    "modules-left": ["wlr/workspaces", "custom/media"],
     "modules-center": [],
     "modules-right": ["idle_inhibitor", "pulseaudio","network", "cpu", "memory", "battery", "clock", "tray"],
     // Modules configuration
@@ -25,6 +25,7 @@
         },
         "active-only": false,
         "sort-by-name": true,
+        "all-outputs":  true,
     },
     "river/tags": {
     "num-tags": 9,
