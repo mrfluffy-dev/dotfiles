@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FILE=$(fd -t f|fzf)
-LINK=$(curl -# "https://oshi.at" -F "f=@$FILE"|awk '/DL/ {print $2}')
-printf "$LINK"|xclip -selection c
-printf "$LINK\n"
+# list all the files in the current directory in rofi
+FILE=$(ls -1 | rofi -dmenu -i -p "Select file to open")
+URL=$(curl -F "file=@$FILE" https://0x0.st)
+printf "$URL" | wl-copy -n

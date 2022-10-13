@@ -76,8 +76,6 @@
 (require 'elcord)
 (elcord-mode)
 
-(doom/set-frame-opacity 90)
-
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
   :bind (("C-TAB" . 'copilot-accept-completion-by-word)
