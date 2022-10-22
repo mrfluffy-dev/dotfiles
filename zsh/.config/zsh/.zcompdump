@@ -411,6 +411,7 @@ _comps=(
 'ggetopt' '_getopt'
 'ggrep' '_grep'
 'ggv' '_gnome-gv'
+'gh' '_gh'
 'ghcup' '_ghcup'
 'ghostscript' '_ghostscript'
 'ghostview' '_pspdf'
@@ -696,7 +697,6 @@ _comps=(
 'mencal' '_mencal'
 'mere' '_mere'
 'merge' '_rcs'
-'meson' '_meson'
 'metaflac' '_flac'
 'mformat' '_mtools'
 'mgv' '_pspdf'
@@ -789,7 +789,6 @@ _comps=(
 'nginx' '_nginx'
 'ngrep' '_ngrep'
 'nice' '_nice'
-'ninja' '_ninja'
 'nkf' '_nkf'
 'nl' '_nl'
 'nm' '_nm'
@@ -814,6 +813,7 @@ _comps=(
 'oggdec' '_vorbis'
 'oggenc' '_vorbis'
 'ogginfo' '_vorbis'
+'oi' '_oi'
 'oksh' '_sh'
 'okular' '_okular'
 'oomctl' '_oomctl'
@@ -1613,15 +1613,15 @@ autoload -Uz _alacritty _arch _base32 _base64 _basename \
             _cut _date _dd _df _dir \
             _dircolors _dirname _du _echo _env \
             _exa _expand _expr _factor _false \
-            _fd _fmt _fold _ghcup _groups \
-            _hashsum _head _hostid _hostname _hostnamectl \
-            _id _install _join _journalctl _kernel-install \
-            _kill _kitty _libinput _link _ln \
-            _localectl _loginctl _logname _ls _machinectl \
-            _meson _mkdir _mkfifo _mkinitcpio _mknod \
+            _fd _fmt _fold _gh _ghcup \
+            _groups _hashsum _head _hostid _hostname \
+            _hostnamectl _id _install _join _journalctl \
+            _kernel-install _kill _kitty _libinput _link \
+            _ln _localectl _loginctl _logname _ls \
+            _machinectl _mkdir _mkfifo _mkinitcpio _mknod \
             _mktemp _more _mpv _mv _networkctl \
-            _nice _ninja _nl _nohup _nproc \
-            _numfmt _od _oomctl _pacman _paru \
+            _nice _nl _nohup _nproc _numfmt \
+            _od _oi _oomctl _pacman _paru \
             _paste _pathchk _pinky _playerctl _pr \
             _printenv _printf _ptx _pulseaudio _pwd \
             _qpdf _readlink _realpath _relpath _resolvectl \

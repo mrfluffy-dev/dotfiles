@@ -11,4 +11,4 @@ cd $DIR
 NAME=$(rofi -dmenu -p "Name of the video")
 cd ..
 # record the screen with wf-recorder
-wf-recorder --device=/dev/dri/renderD128 --audio=alsa_output.pci-0000_05_00.6.analog-stereo.monitor --file=$DIR/$NAME
+wf-recorder --device=/dev/dri/renderD128 --audio=alsa_output.pci-0000_05_00.6.analog-stereo.monitor --file=$DIR/$NAME.mp4

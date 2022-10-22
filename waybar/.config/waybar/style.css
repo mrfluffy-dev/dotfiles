@@ -77,6 +77,8 @@ window#waybar {
 #clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode, #custom-wofi-power {
     padding: 0 10px;
     margin: 0 2px;
+
+    color: #f8f8f2;
 }
 
 #clock {
