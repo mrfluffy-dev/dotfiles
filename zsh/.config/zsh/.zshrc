@@ -3,6 +3,7 @@ HISTFILE=~/.histfile
 HISTSIZE=3000
 SAVEHIST=3000
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#64677a,bold,underline"
 bindkey -v
 source ~/.zsh/spaceship/spaceship.zsh
 export PATH=$HOME/.local/bin/genymotion:$HOME/bin:/usr/local/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.cabal/bin:$HOME/.ghcup/bin:$HOME/.stack/bin:$PATH

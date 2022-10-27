@@ -35,11 +35,11 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type `relative)
 
-(set-fontset-font "fontset-default" nil (font-spec :size 15 :name "Meterial Icons"))
+(set-fontset-font "fontset-default" nil (font-spec :size 17 :name "Meterial Icons"))
 
-(setq doom-font (font-spec :family "Monocraft" :size 15)
-      doom-variable-pitch-font (font-spec :family "Monocraft" :size 15)
-      doom-big-font (font-spec :family "Monocraft" :size 24))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 17)
+      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 17)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 24))
 
 (require 'whitespace)
 (setq whitespace-line-column 99)
@@ -59,8 +59,6 @@
   '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
   '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
 )
-
-
 
 
 
@@ -137,6 +135,29 @@
          :map company-mode-map
          ("<tab>" . 'my-tab)
          ("TAB" . 'my-tab)))
+
+;; asm stuff
+(use-package! nasm-mode
+  :mode "\\.[n]*\\(asm\\|s\\)\\'")
+
+;; Get Haxor VM from https://github.com/krzysztof-magosa/haxor
+(use-package! haxor-mode
+  :mode "\\.hax\\'")
+
+(use-package! mips-mode
+  :mode "\\.mips\\'")
+
+(use-package! riscv-mode
+  :mode "\\.riscv\\'")
+
+(use-package x86-lookup
+  :ensure t
+  :config
+  (setq  x86-lookup-pdf "~/.config/doom/asm-ref.pdf"))
+
+
+
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one

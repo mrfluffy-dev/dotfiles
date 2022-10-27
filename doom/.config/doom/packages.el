@@ -55,4 +55,12 @@
 (package! ein)
 (package! copilot
   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
+(package! highlight-indent-guides)
+
+(package! nasm-mode :pin "65ca6546fc395711fac5b3b4299e76c2303d43a8")
+(package! haxor-mode :pin "6fa25a8e6b6a59481bc0354c2fe1e0ed53cbdc91")
+(package! mips-mode :pin "98795cdc81979821ac35d9f94ce354cd99780c67")
+(package! riscv-mode :pin "8e335b9c93de93ed8dd063d702b0f5ad48eef6d7")
+(package! x86-lookup :pin "1573d61cc4457737b94624598a891c837fb52c16")
+
 ;;(package! jupyter)
