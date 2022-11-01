@@ -37,9 +37,9 @@
 
 (set-fontset-font "fontset-default" nil (font-spec :size 17 :name "Meterial Icons"))
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 17)
-      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 17)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 24))
+(setq doom-font (font-spec :family "Illusion Z" :size 17)
+      doom-variable-pitch-font (font-spec :family "Illusion Z" :size 17)
+      doom-big-font (font-spec :family "Illusion Z" :size 24))
 
 (require 'whitespace)
 (setq whitespace-line-column 99)
@@ -122,8 +122,6 @@
   (or (copilot-accept-completion)
       (company-indent-or-complete-common nil)))
 
-(require 'elcord)
-(elcord-mode)
 
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
