@@ -1,0 +1,54 @@
+(defwindow bar
+  :monitor 0
+  :exclusive true
+  :geometry (geometry
+    :height "3%"
+    :width "100%"
+    :anchor "top center"
+  )
+  :stacking "fg"
+  :windowtype "dock"
+(bar))
+
+
+
+
+(defwindow calendar
+  :monitor 0
+  :exclusive false
+  :geometry (geometry
+    :height "20%"
+    :width "20%"
+    :anchor "top right"
+  )
+  :stacking "fg"
+  :windowtype "normal"
+(cal))
+
+(defwidget bar []
+           (box :orientation "horizontal" :class "bar"
+                 (literal :class "workspaces" :content workspace)
+                 (label :class "spacer" :text "")
+                 (box :orientation "horizontal" :class "bar_right"
+                       (circular-progress :class "disk" :value "${round(EWW_DISK[`/home`].used/EWW_DISK[`/home`].total*100,0)}"
+                                           :max-value 100 :min-value 0 :thickness 2 :size 20 "SSD")
+                     (circular-progress :class "cpu" :value "${round(EWW_CPU.avg,0)}"
+                                         :max-value 100 :min-value 0 :thickness 2 :size 20 "CPU")
+                     (circular-progress :class "mem" :value "${round(EWW_RAM.used_mem/EWW_RAM.total_mem*100,0)}"
+                                         :max-value 100 :min-value 0 :thickness 2 :size 20 "RAM")
+                       (label :class "net" :text "${round(EWW_NET[`enp4s0`].NET_DOWN/131072,1)} ↓↑ ${round(EWW_NET[`enp4s0`].NET_UP/131072,1)}")
+                       (button :class "time" :onclick "scripts/calendar calendar"
+                                "${date.hour}:${date.min} ${date.am_pm}")
+                 (literal :class "idle" :content idle))))
+
+(defpoll date :interval "5s"
+         `date +'{"hour":"%I","min":"%M","am_pm":"%p","day":"%d","month":"%m","year":"%Y"}'`)
+
+(defwidget cal []
+           (calendar :class "calendar"
+                     :date "${date.year}-${date.month}-${date.day}"
+                     :format "%a %d %b"))
+
+(deflisten workspace "scripts/workspace")
+
+(deflisten idle "scripts/idel")

@@ -1,0 +1,14 @@
+#! /bin/bash
+
+#check if wayland-idle-inhibitor.py is running
+#loop forever
+while true
+do
+      if pgrep -x "way-inhibitor" > /dev/null
+      then
+          echo "(button :class \"idle_btn_on\" :onclick \"killall  way-inhibitor\"\"\")"
+      else
+          echo "(button :class \"idle_btn_off\" :onclick \"way-inhibitor &\" \"\")"
+      fi
+      sleep 1
+done
