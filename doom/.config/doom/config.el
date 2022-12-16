@@ -105,6 +105,8 @@
 
 (setq +doom-dashboard-ascii-banner-fn #'my-weebery-is-always-greater)
 
+(setq ess-r--no-company-meta t)
+
 (set-frame-parameter nil 'alpha-background 90) ; For current frame
 (add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
 

@@ -36,7 +36,6 @@
                                          :max-value 100 :min-value 0 :thickness 2 :size 20 "CPU")
                      (circular-progress :class "mem" :value "${round(EWW_RAM.used_mem/EWW_RAM.total_mem*100,0)}"
                                          :max-value 100 :min-value 0 :thickness 2 :size 20 "RAM")
-                       (label :class "net" :text "${round(EWW_NET[`enp4s0`].NET_DOWN/131072,1)} ↓↑ ${round(EWW_NET[`enp4s0`].NET_UP/131072,1)}")
                        (button :class "time" :onclick "scripts/calendar calendar"
                                 "${date.hour}:${date.min} ${date.am_pm}")
                  (literal :class "idle" :content idle))))
