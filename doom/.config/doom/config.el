@@ -156,6 +156,21 @@
   (setq  x86-lookup-pdf "~/.config/doom/asm-ref.pdf"))
 
 
+;; chatgpt stuff
+;;(use-package! chatgpt
+;;  :defer t
+;;  :config
+;;  (unless (boundp 'python-interpreter)
+;;    (defvaralias 'python-interpreter 'python-shell-interpreter))
+;;  (setq chatgpt-repo-path (expand-file-name "straight/repos/ChatGPT.el/" doom-local-dir))
+;;  (set-popup-rule! (regexp-quote "*ChatGPT*")
+;;    :side 'bottom :size .5 :ttl nil :quit t :modeline nil)
+;;  :bind ("C-c q" . chatgpt-query))
+
+
+(load! "lisp/chatgpt.el")
+
+
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
