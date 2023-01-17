@@ -111,6 +111,11 @@
 (add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
 
 
+;undo fix
+(setq undo-tree-enable-undo-in-region nil)
+(setq undo-limit 80000000)
+
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
