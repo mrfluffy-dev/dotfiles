@@ -67,6 +67,7 @@
 (add-hook! '+doom-dashboard-functions :append
   (insert "\n" (+doom-dashboard--center +doom-dashboard--width "The UwU Editor")))
 
+;;
 (defun my-weebery-is-always-greater ()
   (let* ((banner '("⣿⣿⣿⣿⣿⣿⡿⠋⠁⠀⠀⠀⢀⣾⡿⠋⠉⠁⢠⣿⠏⢁⣿⣿⣿⠏⠉⢸⣿⡏⠉⢻⣿⣿⡇⠈⠙⢿⣿⣿⣿⣷⡆⠀⠀⢇⠢⣈⡒⡤"
 "⣿⣿⣿⣿⣿⣏⣴⡇⠀⠀⠀⢠⡿⠋⠀⠀⠀⣰⣿⠋⠀⣼⣿⣿⠏⠀⠀⡾⣿⠁⠀⠀⣿⣿⣷⠀⠀⠀⠹⣿⣿⣿⣿⣄⢀⣿⣷⣿⣶⣶"
@@ -113,7 +114,7 @@
 
 ;undo fix
 (setq undo-tree-enable-undo-in-region nil)
-(setq undo-limit 80000000)
+(setq undo-limit 8000000000)
 
 
 (org-babel-do-load-languages
@@ -162,21 +163,57 @@
 
 
 ;; chatgpt stuff
-;;(use-package! chatgpt
-;;  :defer t
-;;  :config
-;;  (unless (boundp 'python-interpreter)
-;;    (defvaralias 'python-interpreter 'python-shell-interpreter))
-;;  (setq chatgpt-repo-path (expand-file-name "straight/repos/ChatGPT.el/" doom-local-dir))
-;;  (set-popup-rule! (regexp-quote "*ChatGPT*")
-;;    :side 'bottom :size .5 :ttl nil :quit t :modeline nil)
-;;  :bind ("C-c q" . chatgpt-query))
-
-
-(load! "lisp/chatgpt.el")
+(use-package! chatgpt
+  :defer t
+  :config
+  (unless (boundp 'python-interpreter)
+    (defvaralias 'python-interpreter 'python-shell-interpreter))
+  (setq chatgpt-repo-path (expand-file-name "straight/repos/ChatGPT.el/" doom-local-dir))
+  (set-popup-rule! (regexp-quote "*ChatGPT*")
+    :side 'bottom :size .5 :ttl nil :quit t :modeline nil)
+  :bind ("C-c q" . chatgpt-query))
 
 
 
+;;count the frame-list
+
+
+;;discord rich presence
+(require 'elcord)
+(add-hook 'doom-switch-buffer-hook
+          (lambda ()
+            (if (string= (buffer-name) "*doom*")
+                (elcord-mode -1)
+              (elcord-mode 1))))
+
+(defun elcord--disable-elcord-if-no-frames (f)
+    (declare (ignore f))
+    (when (let ((frames (delete f (visible-frame-list))))
+            (or (null frames)
+                (and (null (cdr frames))
+                     (eq (car frames) terminal-frame))))
+      (elcord-mode -1)
+      (add-hook 'after-make-frame-functions 'elcord--enable-on-frame-created)))
+
+  (defun elcord--enable-on-frame-created (f)
+    (declare (ignore f))
+    (elcord-mode +1))
+
+  (defun my/elcord-mode-hook ()
+    (if elcord-mode
+        (add-hook 'delete-frame-functions 'elcord--disable-elcord-if-no-frames)
+      (remove-hook 'delete-frame-functions 'elcord--disable-elcord-if-no-frames)))
+
+  (add-hook 'elcord-mode-hook 'my/elcord-mode-hook)
+
+(setq warning-minimum-level :emergency)
+
+
+;;(add-hook 'doom-switch-buffer-hook
+;;          (lambda ()
+;;            (if (string= (buffer-name) "*doom*")
+;;                (elcord-mode -1)
+;;              (elcord-mode 1))))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

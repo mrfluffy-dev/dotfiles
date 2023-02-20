@@ -1,4 +1,4 @@
-;;; ../../dotfiles/doom/.config/doom/lisp/chatgpt.el -*- lexical-binding: t; -*-
+;;; chatgpt.el --- Simple ChatGPT frontend for Emacs  -*- lexical-binding: t -*-
 
 ;; Copyright (C) Gavin Jaeger-Freeborn
 
@@ -151,6 +151,7 @@ It then displays the results in a separate buffer `chatgpt-buffer'."
 ;;;###autoload
 (defun chatgpt-prompt-region-and-replace (BEG END)
   "Replace region from BEG to END with the response from the ChatGPT API.
+
 The region is BEG and until END"
   (interactive "r")
 
@@ -192,6 +193,7 @@ The region is BEG and until END"
 (defun chatgpt--query-open-api (prompt callback)
   "Send a string PROMPT to OpenAI API and pass the resulting buffer to CALLBACK.
 The environment variable OPENAI_API_KEY is used as your API key
+
 You can register an account here
 https://beta.openai.com/docs/introduction/key-concepts"
   (let* ((api-key (getenv "OPENAI_API_KEY"))

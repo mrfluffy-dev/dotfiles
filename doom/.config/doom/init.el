@@ -21,9 +21,9 @@
 
        :completion
        (company +childframe)         ; the ultimate code completion backend
-       ;;helm              ; the *other* search engine for love and life
+       ;;(helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       ;;ivy               ; a search engine for love and life
+       ;;(ivy +fuzzy)              ; a search engine for love and life
        vertico           ; the search engine of the future
 
        :ui
@@ -90,6 +90,7 @@
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
+       ;;biblio            ; Writes a PhD for you (citation needed)
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
@@ -97,7 +98,7 @@
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
-       ;;pdf               ; pdf enhancements
+       pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
@@ -170,7 +171,7 @@
        ;;web               ; the tubes
        ;;yaml              ; JSON, but readable
        ;;zig               ; C, but simpler
-:w:email
+ :w:email
        ;;(mu4e +org +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
