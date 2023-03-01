@@ -66,4 +66,5 @@
 (package! riscv-mode :pin "8e335b9c93de93ed8dd063d702b0f5ad48eef6d7")
 (package! x86-lookup :pin "1573d61cc4457737b94624598a891c837fb52c16")
 
+
 ;;(package! jupyter)
