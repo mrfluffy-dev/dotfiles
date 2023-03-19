@@ -20,8 +20,8 @@
        ;;layout            ; auie,ctsrnm is the superior home row
 
        :completion
-       (corfu +icons +orderless) ; the even more ultimate completion backend
-       ;;(company +icons +childframe)         ; the ultimate code completion backend
+       ;;(corfu +icons +orderless) ; the even more ultimate completion backend
+       (company +icons +childframe)         ; the ultimate code completion backend
        ;;(helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;(ivy +fuzzy)              ; a search engine for love and life
@@ -95,8 +95,8 @@
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
-       ;;lsp               ; M-x vscode
-       lsp2                ; my custom one
+       lsp               ; M-x vscode
+       ;;lsp2                ; my custom one
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
@@ -117,7 +117,7 @@
        ;;beancount         ; mind the GAAP
        (cc +lsp)                ; C > C++ == 1
        ;;clojure           ; java with a lisp
-       ;;common-lisp       ; if you've seen one lisp, you've seen them all
+       common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        (csharp +lsp)       ; unity, .NET, and mono shenanigans
@@ -173,7 +173,7 @@
        ;;web               ; the tubes
        ;;yaml              ; JSON, but readable
        ;;zig               ; C, but simpler
- :w:email
+       :email
        ;;(mu4e +org +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
@@ -183,7 +183,7 @@
        ;;emms
        ;;everywhere        ; *leave* Emacs!? You must be joking
        ;;irc               ; how neckbeards socialize
-       ;;(rss +org)        ; emacs as an RSS reader
+       (rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
 
        :config

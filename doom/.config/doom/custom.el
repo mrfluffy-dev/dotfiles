@@ -3,6 +3,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(elfeed-feeds
+   '("https://www.reddit.com/r/hentai.rss" "https://www.reddit.com/r/AnimeFeets.rss" "https://www.reddit.com/r/thighdeology.rss" "https://www.reddit.com/r/UndressingHentai.rss" "https://www.reddit.com/r/hentaibondage.rss" "https://www.reddit.com/r/ElegantR34.rss" "https://www.reddit.com/r/AnimeGirlsAndThongs.rss" "https://www.reddit.com/r/AnimeGirls.rss"))
  '(warning-suppress-log-types '((initialization)))
  '(warning-suppress-types '((initialization) (initialization))))
 (custom-set-faces
