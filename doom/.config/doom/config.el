@@ -63,12 +63,12 @@
 (add-hook 'prog-mode-hook 'fci-mode)
 
 (custom-set-faces
-  '(org-level-1 ((t (:inherit outline-1 :height 1.4))))
-  '(org-level-2 ((t (:inherit outline-2 :height 1.3))))
-  '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
-  '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
-  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
-)
+ '(org-level-1 ((t (:inherit outline-1 :height 1.4))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.3))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+
 
 ;; company mode delay 0
 (setq company-idle-delay 0)
@@ -88,6 +88,9 @@
 
 ;;
 ;;
+;;
+(setq org-image-actual-width 300)
+
 (setq fancy-splash-image (concat doom-user-dir "xenia.png"))
 
 (setq ess-r--no-company-meta t)
@@ -96,7 +99,7 @@
 (add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
 
 
-;undo fix
+                                        ;undo fix
 (setq undo-tree-enable-undo-in-region nil)
 (setq undo-limit 8000000000)
 
@@ -146,17 +149,10 @@
   :config
   (setq  x86-lookup-pdf "~/.config/doom/asm-ref.pdf"))
 
+(setq openai-key (getenv "OPENAIKEY"))
+(setq chatgpt-input-method 'minibuffer)
 
-;; chatgpt stuff
-(use-package! chatgpt
-  :defer t
-  :config
-  (unless (boundp 'python-interpreter)
-    (defvaralias 'python-interpreter 'python-shell-interpreter))
-  (setq chatgpt-repo-path (expand-file-name "straight/repos/ChatGPT.el/" doom-local-dir))
-  (set-popup-rule! (regexp-quote "*ChatGPT*")
-    :side 'bottom :size .5 :ttl nil :quit t :modeline nil)
-  :bind ("C-c q" . chatgpt-query))
+
 
 ;;discord rich presence
 (require 'elcord)
@@ -167,24 +163,24 @@
               (elcord-mode 1))))
 
 (defun elcord--disable-elcord-if-no-frames (f)
-    (declare (ignore f))
-    (when (let ((frames (delete f (visible-frame-list))))
-            (or (null frames)
-                (and (null (cdr frames))
-                     (eq (car frames) terminal-frame))))
-      (elcord-mode -1)
-      (add-hook 'after-make-frame-functions 'elcord--enable-on-frame-created)))
+  (declare (ignore f))
+  (when (let ((frames (delete f (visible-frame-list))))
+          (or (null frames)
+              (and (null (cdr frames))
+                   (eq (car frames) terminal-frame))))
+    (elcord-mode -1)
+    (add-hook 'after-make-frame-functions 'elcord--enable-on-frame-created)))
 
-  (defun elcord--enable-on-frame-created (f)
-    (declare (ignore f))
-    (elcord-mode +1))
+(defun elcord--enable-on-frame-created (f)
+  (declare (ignore f))
+  (elcord-mode +1))
 
-  (defun my/elcord-mode-hook ()
-    (if elcord-mode
-        (add-hook 'delete-frame-functions 'elcord--disable-elcord-if-no-frames)
-      (remove-hook 'delete-frame-functions 'elcord--disable-elcord-if-no-frames)))
+(defun my/elcord-mode-hook ()
+  (if elcord-mode
+      (add-hook 'delete-frame-functions 'elcord--disable-elcord-if-no-frames)
+    (remove-hook 'delete-frame-functions 'elcord--disable-elcord-if-no-frames)))
 
-  (add-hook 'elcord-mode-hook 'my/elcord-mode-hook)
+(add-hook 'elcord-mode-hook 'my/elcord-mode-hook)
 
 (setq elcord-idle-message "Out doing your mom")
 
