@@ -1,21 +1,10 @@
 #!/usr/bin/env bash
 
-#pipewire & /usr/bin/pipewire-pulse & /usr/bin/pipewire-media-session &
-#xss-lock /home/$USER/.config/script/betterlockscreen.sh  &
-#fcitx -d &
-#copyq --start-server &
-#dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=qtile
-#xset +fp /home/mrfluffy/.local/share/fonts
-#xset fp rehash
-#xsetroot -cursor_name left_ptr
-#eval "$(gnome-keyring-daemon --start)"
-#export SSH_AUTH_SOCK
-#mkdir -p "$HOME"/.local/share/keyrings
-#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-#~/.azotebg
-nitrogen --restore &
-xss-lock -- /home/mrfluffy/.config/script/betterlockscreen.sh &
-picom --backend glx &
-sxhkd &
-
-#/home/mrfluffy/.config/script/waylock.sh &
+~/.config/script/theme-fix &
+systemctl --user restart xdg-desktop-portal &
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+~/.config/script/waylock.sh &
+foot -s &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+#run wlr-randr --output DP-3 --pos 1920,0 --output HDMI-A-1 --pos 0,0 after sleeping for 0.5 seconds
+sleep 0.5 && wlr-randr --output DP-3 --pos 1920,0 --output HDMI-A-1 --pos 0,0 && ~/.azotebg &

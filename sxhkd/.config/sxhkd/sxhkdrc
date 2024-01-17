@@ -40,3 +40,7 @@ XF86AudioNext
 alt + o
   rofimoji
 
+alt + l
+   bspc monitor -f DisplayPort-2
+alt + h
+   bspc monitor -f DisplayPort-1

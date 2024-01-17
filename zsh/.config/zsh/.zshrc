@@ -6,20 +6,21 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#64677a,bold,underline"
 bindkey -v
 source ~/.zsh/spaceship/spaceship.zsh
-export PATH=$HOME/.local/bin/genymotion:$HOME/bin:/usr/local/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.cabal/bin:$HOME/.ghcup/bin:$HOME/.stack/bin:$PATH
+export PATH=$HOME/.local/bin/genymotion:$HOME/bin:/usr/local/bin:$HOME/.config/emacs/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.cabal/bin:$HOME/.local/share/cargo/bin:/usr/local/go/bin:/home/mrfluffy/.local/share/go/bin:$PATH
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DOWNLOAD_DIR="$HOME/Downloads"
-export NIX_PATH="$HOME/.nix-defexpr/channels"
 export FZF_DEFAULT_COMMAND="rg ~ --files --hidden"
 export FZF_DEFAULT_OPTS='--height 30% --reverse'
 export FZF_CTRL_R_OPTS='--sort'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export NIX_PATH="$HOME/.nix-defexpr/"
 export TERMINAL="alacritty"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
+export NIX_PATH="$HOME/.nix-defexpr/channels"
+export LD_LIBRARY_PATH=/usr/local/lib:$HOME/.nix-profile/lib:$LD_LIBRARY_PATH
+
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 autoload -U compinit && compinit -u
@@ -28,6 +29,8 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[N" down-line-or-beginning-search
 alias switch="sudo nixos-rebuild switch"
+alias steam="nixVulkanIntel steam"
+alias steam="nixVulkanIntel heroic"
 alias nix-edit="sudo vim /etc/nixos/configuration.nix"
 alias ls="exa -lag --icons"
 alias upload="~/.config/script/upload.sh"
@@ -45,10 +48,9 @@ alias time="hyperfine"
 alias kami="~/Documents/Rust/kami/target/release/kami"
 alias calc="cpc"
 alias pdf="mupdf"
-alias emacs="emacsclient --alternate-editor= --create-frame"
+alias emacs="emacs"
 #home clean up
-export EDITOR="lvim" 
-export ANDROID_HOME="$XDG_DATA_HOME"/android
+export EDITOR="emacs"
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export GOPATH="$XDG_DATA_HOME"/go
@@ -75,3 +77,11 @@ macchina
 [ -f ~/.zsh/.fzf.zsh ] && source ~/.zsh/.fzf.zsh
 export PATH=$PATH:/home/mrfluffy/.spicetify
 eval "$(zoxide init zsh)"
+
+#[ -f "/home/mrfluffy/.ghcup/env" ] && source "/home/mrfluffy/.ghcup/env" # ghcup-env
+# send all output to void
+#ln -s /home/mrfluffy/.nix-profile/share/applications/* ~/.local/share/applications/ 2> /dev/null
+
+#[ -f "/home/mrfluffy/.ghcup/env" ] && source "/home/mrfluffy/.ghcup/env" # ghcup-env
+
+[ -f "/home/mrfluffy/.ghcup/env" ] && source "/home/mrfluffy/.ghcup/env" # ghcup-env

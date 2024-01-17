@@ -24,40 +24,55 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, DropDown, ScratchPad
-from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
-from libqtile.dgroups import simple_key_binder
-import mouse as cursor
-import psutil
 import os
 import subprocess
 
+import mouse as cursor
+import psutil
+from libqtile import bar, hook, layout, widget
+from libqtile.config import (Click, Drag, DropDown, Group, Key, Match,
+                             ScratchPad, Screen)
+from libqtile.dgroups import simple_key_binder
+from libqtile.lazy import lazy
+from libqtile.utils import guess_terminal
+
 mod = "mod1"
-terminal = "alacritty"
+terminal = "footclient"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
-    Key([mod], "h", lazy.to_screen(1), desc="Move focus to left"),
-    Key([mod], "l", lazy.to_screen(0), desc="Move focus to right"),
+    Key([mod], "h", lazy.to_screen(0), desc="Move focus to left"),
+    Key([mod], "l", lazy.to_screen(1), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.next(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.previous(), desc="Move focus up"),
-
-    Key([mod], "backslash", lazy.group["SPD"].dropdown_toggle("term"), desc="Toggle terminal"),
+    Key(
+        [mod],
+        "backslash",
+        lazy.group["SPD"].dropdown_toggle("term"),
+        desc="Toggle terminal",
+    ),
     # Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key(
+        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
+    ),
+    Key(
+        [mod, "shift"],
+        "l",
+        lazy.layout.shuffle_right(),
+        desc="Move window to the right",
+    ),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key(
+        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
+    ),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
@@ -79,20 +94,27 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "d", lazy.spawn("rofi -m -4 -no-lazy-greb -show drun -icon-theme 'Papirus' -show-icons"), desc="Spawn a command using a prompt widget"),
+    Key(
+        [mod],
+        "d",
+        lazy.spawn("rofi -no-lazy-greb -show drun -icon-theme 'Papirus' -show-icons"),
+        desc="Spawn a command using a prompt widget",
+    ),
 ]
 
 
-#一二三四五六七八九
-groups = [Group("1",label=("一")),
-          Group("2",label=("二")),
-          Group("3",label=("三")),
-          Group("4",label=("四")),
-          Group("5",label=("五")),
-          Group("6",label=("六")),
-          Group("7",label=("七")),
-          Group("8",label=("八")),
-          Group("9",label=("九")),]
+# 一二三四五六七八九
+groups = [
+    Group("1", label=("一")),
+    Group("2", label=("二")),
+    Group("3", label=("三")),
+    Group("4", label=("四")),
+    Group("5", label=("五")),
+    Group("6", label=("六")),
+    Group("7", label=("七")),
+    Group("8", label=("八")),
+    Group("9", label=("九")),
+]
 for i in groups:
     keys.extend(
         [
@@ -118,13 +140,20 @@ for i in groups:
     )
 
 
-groups.append(ScratchPad('scratchpad', [
-    DropDown('term', terminal, width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
-]))
+groups.append(
+    ScratchPad(
+        "scratchpad",
+        [
+            DropDown("term", terminal, width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
+        ],
+    )
+)
 
-keys.extend([
-    Key([mod], "backslash", lazy.group['scratchpad'].dropdown_toggle('term')),
-])
+keys.extend(
+    [
+        Key([mod], "backslash", lazy.group["scratchpad"].dropdown_toggle("term")),
+    ]
+)
 
 
 layouts = [
@@ -133,7 +162,7 @@ layouts = [
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    layout.MonadTall(border_focus='#bd93f9',margin=5,border_width=4),
+    layout.MonadTall(border_focus="#bd93f9", margin=5, border_width=4),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
@@ -154,22 +183,29 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(highlight_method='text',active='5c6b99',this_current_screen_border='bd93f9', background='282a36',inactive='ffffff'),
-                widget.Prompt(background='282a36'),
-                widget.Spacer(background='282a36'),
-                widget.Chord(background='282a36',
+                widget.GroupBox(
+                    highlight_method="text",
+                    active="5c6b99",
+                    this_current_screen_border="bd93f9",
+                    background="282a36",
+                    inactive="ffffff",
+                ),
+                widget.Prompt(background="282a36"),
+                widget.Spacer(background="282a36"),
+                widget.Chord(
+                    background="282a36",
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p",background='282a36'),
-                widget.Spacer(background='282a36'),
-                #widget.Wlan(format='{essid} {percent:2.0%}',interface='wlp2s0',background='282a36'),
-                widget.Volume(fmt='VOL:{}',background='282a36'),
-                widget.CPU(format='CPU:{load_percent}%',background='282a36'),
-                widget.Memory(background='282a36',format='RAM:{MemUsed: .0f}{mm}'),
-                widget.Systray(background='282a36'),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p", background="282a36"),
+                widget.Spacer(background="282a36"),
+                # widget.Wlan(format='{essid} {percent:2.0%}',interface='wlp2s0',background='282a36'),
+                widget.Volume(fmt="VOL:{}", background="282a36"),
+                widget.CPU(format="CPU:{load_percent}%", background="282a36"),
+                widget.Memory(background="282a36", format="RAM:{MemUsed: .0f}{mm}"),
+                widget.Systray(background="282a36"),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
@@ -179,21 +215,28 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(highlight_method='text',active='5c6b99',this_current_screen_border='bd93f9', background='282a36',inactive='ffffff'),
-                widget.Prompt(background='282a36'),
-                widget.Spacer(background='282a36'),
-                widget.Chord(background='282a36',
+                widget.GroupBox(
+                    highlight_method="text",
+                    active="5c6b99",
+                    this_current_screen_border="bd93f9",
+                    background="282a36",
+                    inactive="ffffff",
+                ),
+                widget.Prompt(background="282a36"),
+                widget.Spacer(background="282a36"),
+                widget.Chord(
+                    background="282a36",
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p",background='282a36'),
-                widget.Spacer(background='282a36'),
-                #widget.Wlan(format='{essid} {percent:2.0%}',interface='wlp2s0',background='282a36'),
-                widget.Volume(fmt='VOL:{}',background='282a36'),
-                widget.CPU(format='CPU:{load_percent}%',background='282a36'),
-                widget.Memory(background='282a36',format='RAM:{MemUsed: .0f}{mm}'),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p", background="282a36"),
+                widget.Spacer(background="282a36"),
+                # widget.Wlan(format='{essid} {percent:2.0%}',interface='wlp2s0',background='282a36'),
+                widget.Volume(fmt="VOL:{}", background="282a36"),
+                widget.CPU(format="CPU:{load_percent}%", background="282a36"),
+                widget.Memory(background="282a36", format="RAM:{MemUsed: .0f}{mm}"),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
@@ -205,15 +248,18 @@ screens = [
 ## Startup applications
 @hook.subscribe.startup_once
 def autostart():
-    home = os.path.expanduser('~')
-    subprocess.Popen([home + '/.config/qtile/autostart.sh'])
+    home = os.path.expanduser("~")
+    subprocess.Popen([home + "/.config/qtile/autostart.sh"])
+
 
 ## Window swalloing
 @hook.subscribe.client_new
 def _swallow(window):
     pid = window.window.get_net_wm_pid()
     ppid = psutil.Process(pid).ppid()
-    cpids = {c.window.get_net_wm_pid(): wid for wid, c in window.qtile.windows_map.items()}
+    cpids = {
+        c.window.get_net_wm_pid(): wid for wid, c in window.qtile.windows_map.items()
+    }
     for i in range(5):
         if not ppid:
             return
@@ -224,23 +270,33 @@ def _swallow(window):
             return
         ppid = psutil.Process(ppid).ppid()
 
+
 @hook.subscribe.client_killed
 def _unswallow(window):
-    if hasattr(window, 'parent'):
+    if hasattr(window, "parent"):
         window.parent.minimized = False
+
 
 @hook.subscribe.client_focus
 def _focus(window):
-    #move mouse to center of window
+    # move mouse to center of window
     position = window.cmd_get_position()
     x = position[0] + (window.cmd_get_size()[0] / 2)
     y = position[1] + (window.cmd_get_size()[1] / 2)
     cursor.move(x, y)
 
+
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
@@ -271,6 +327,7 @@ auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
+
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

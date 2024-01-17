@@ -1,8 +1,11 @@
+{-# LANGUAGE ImportQualifiedPost #-}
+
 import Control.Monad (forM_, join, liftM2)
 import Data.Function (on)
 import Data.List (sortBy)
-import qualified Data.Map as M
+import Data.Map qualified as M
 import Data.Monoid
+import Data.Ratio
 import System.Exit
 import System.IO
 import XMonad
@@ -11,6 +14,7 @@ import XMonad.Actions.UpdatePointer
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.WindowSwallowing
@@ -18,15 +22,16 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.Spiral
 import XMonad.Layout.ThreeColumns
-import qualified XMonad.StackSet as W
+import XMonad.StackSet
+import XMonad.StackSet qualified as W
 import XMonad.Util.EZConfig
+-- import XMonad.Util.Scratchpad
+import XMonad.Util.NamedScratchpad
 import XMonad.Util.NamedWindows (getName)
 import XMonad.Util.Run
-import XMonad.Util.Scratchpad
-import XMonad.Util.NamedScratchpad
 import XMonad.Util.SpawnOnce
 
-myTerminal = "kitty"
+myTerminal = "wezterm"
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
@@ -54,17 +59,18 @@ toggleFull =
     )
 
 myScratchPads :: [NamedScratchpad]
-myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
-                ]
+myScratchPads =
+  [ NS "terminal" spawnTerm findTerm manageTerm
+  ]
   where
-    spawnTerm  = myTerminal ++ " -T scratchpad"
-    findTerm   = title =? "scratchpad"
+    spawnTerm = myTerminal ++ " start --class scratchpad"
+    findTerm = className =? "scratchpad"
     manageTerm = customFloating $ W.RationalRect l t w h
-               where
-                 h = 0.7
-                 w = 0.7
-                 t = 0.85 -h
-                 l = 0.85 -w
+      where
+        h = 0.7
+        w = 0.7
+        t = 0.85 - h
+        l = 0.85 - w
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) =
   M.fromList $
@@ -77,22 +83,22 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       -- open kde colour picker
       ((modm, xK_p), spawn "kcolorchooser"),
       -- Volume control
-      ((0, 0x1008ff11), spawn "pamixer --allow-boost -d 5"), --Folume down
-      ((0, 0x1008ff13), spawn "pamixer --allow-boost -i 5"), --Folume up
-      ((0, 0x1008ff12), spawn "pamixer -t"), --Mute Toggle
-      ((0, 0x1008ffb2), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle"), --Mic Toggle
+      ((0, 0x1008ff11), spawn "pamixer --allow-boost -d 5"), -- Folume down
+      ((0, 0x1008ff13), spawn "pamixer --allow-boost -i 5"), -- Folume up
+      ((0, 0x1008ff12), spawn "pamixer -t"), -- Mute Toggle
+      ((0, 0x1008ffb2), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle"), -- Mic Toggle
 
-      --Brightness control
-      ((0, 0x1008ff02), spawn "light -A 10"), --Brightness Up
-      ((0, 0x1008ff03), spawn "light -U 10"), --Brightness Up
+      -- Brightness control
+      ((0, 0x1008ff02), spawn "light -A 10"), -- Brightness Up
+      ((0, 0x1008ff03), spawn "light -U 10"), -- Brightness Up
 
-      --Media Control
+      -- Media Control
       ((0, 0x1008ff14), spawn "playerctl play-pause"), -- Play/Pause
       ((0, 0x1008ff16), spawn "playerctl previous"), -- Play/Pause
       ((0, 0x1008ff17), spawn "playerctl next"), -- Play/Pause
 
       -- Take screenshot
-      ((0, 0xff61), spawn "flameshot gui"),
+      ((0, 0xff61), spawn "maim -s | xclip -selection clipboard -t image/png -i"),
       -- Lock screen
       ((mod4Mask, xK_l), spawn "betterlockscreen --lock"),
       ((mod4Mask, xK_F5), spawn "/home/$USER/.config/script/refreshXmonad.sh"),
@@ -101,11 +107,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       ((mod4Mask, xK_F10), spawn "arandr"),
       -- launch a terminal
       ((modm, xK_Return), spawn $ XMonad.terminal conf),
+      ((modm, xK_a), spawn "nixGL wezterm start --class=kami ~/Documents/Rust/kami/target/release/kami -a"),
+      ((modm, xK_e), spawn "emacsclient -r"),
       ((modm, xK_backslash), namedScratchpadAction myScratchPads "terminal"),
       -- launch rofi
-      ((modm, xK_d), spawn "rofi -no-lazy-greb -show drun -icon-theme 'Papirus' -show-icons"),
+      ((modm, xK_d), spawn "env LANG=C.UTF-8 rofi -no-lazy-greb -show drun -icon-theme 'Papirus' -show-icons"),
       -- launch a scrachpad
-      ((modm .|. shiftMask, xK_s), spawn "kitty --class=scratchpad"),
+      ((modm .|. shiftMask, xK_s), spawn "alacritty --class=scratchpad"),
       -- close focused window
       ((modm, xK_q), kill),
       -- Rotate through the available layout algorithms
@@ -163,16 +171,18 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ( (modm, button1),
         ( \w ->
-            focus w >> mouseMoveWindow w
+            XMonad.focus w
+              >> mouseMoveWindow w
               >> windows W.shiftMaster
         )
       ),
       -- mod-button2, Raise the window to the top of the stack
-      ((modm, button2), (\w -> focus w >> windows W.shiftMaster)),
+      ((modm, button2), (\w -> XMonad.focus w >> windows W.shiftMaster)),
       -- mod-button3, Set the window to floating mode and resize by dragging
       ( (modm, button3),
         ( \w ->
-            focus w >> mouseResizeWindow w
+            XMonad.focus w
+              >> mouseResizeWindow w
               >> windows W.shiftMaster
         )
       )
@@ -196,7 +206,7 @@ mySpacing =
   spacingRaw
     False -- Only for >1 window
     -- The bottom edge seems to look narrower than it is
-    (Border 30 3 3 3) -- Size of screen edge gaps
+    (Border 3 3 3 3) -- Size of screen edge gaps
     True -- Enable screen edge gaps
     (Border 3 3 3 3) -- Size of window gaps
     True -- Enable window gaps
@@ -209,14 +219,19 @@ myManageHook =
       className =? "Minecraft Launcher" --> doShift "8",
       className =? "YouTube Music" --> doShift "9",
       className =? "Thunar" --> viewShift "5",
+      className =? "discord" --> doShift "2",
+      className =? "heroic" --> doShift "2",
+      className =? "steamhelper" --> viewShift "1",
+      className =? "kami" --> doRectFloat (RationalRect (1 % 4) (1 % 6) (1 % 2) (2 % 3)),
+      className =? "mpv" --> doFullFloat,
       resource =? "desktop_window" --> doIgnore,
       resource =? "kdesktop" --> doIgnore
     ]
-  <+> namedScratchpadManageHook myScratchPads
+    <+> namedScratchpadManageHook myScratchPads
   where
     viewShift = doF . liftM2 (.) W.greedyView W.shift
 
-myEventHook = swallowEventHook (className =? "kitty" <||> className =? "Termite") (return True)
+myEventHook = swallowEventHook (className =? "org.wezfurlong.wezterm") (return True)
 
 myLogHook = do
   winset <- gets windowset
@@ -233,19 +248,18 @@ myLogHook = do
       | otherwise = " " ++ ws ++ " "
     sort' = sortBy (compare `on` (!! 0))
 
-myHandleEventHook = swallowEventHook (className =? "kitty" <||> className =? "Termite") (return True)
-
 myStartupHook = do
-  spawnOnce "caffeine &"
-  spawnOnce "/home/$USER/.config/script/redshift.sh &"
-  spawnOnce "xss-lock /home/$USER/.config/script/betterlockscreen.sh  &"
-  spawnOnce "nextcloud --background &"
-  spawnOnce "fcitx -d &"
-  spawnOnce "copyq --start-server"
-  spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-  spawnOnce "nm-applet &"
+  --spawnOnce "env LANG=C.UTF-8 caffeine &"
+  --spawnOnce "/home/$USER/.config/script/redshift.sh &"
+  --spawnOnce "xss-lock /home/$USER/.config/script/betterlockscreen.sh  &"
+  spawnOnce "steam &"
+  spawnOnce "sleep 7 && discord &"
+  --spawnOnce "fcitx -d &"
+  --spawnOnce "copyq --start-server"
+  --spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+  --spawnOnce "nm-applet &"
   spawnOnce "picom --backend glx &"
-  spawnOnce "nitrogen --restore &"
+  --spawnOnce "nitrogen --restore &"
 
 myPP = def {ppCurrent = xmobarColor "black" "whight"}
 
@@ -272,7 +286,7 @@ main = do
                 clickJustFocuses = myClickJustFocuses,
                 borderWidth = myBorderWidth,
                 modMask = myModMask,
-                workspaces = myWorkspaces,
+                XMonad.workspaces = myWorkspaces,
                 normalBorderColor = myNormalBorderColor,
                 focusedBorderColor = myFocusedBorderColor,
                 -- key bindings
@@ -280,7 +294,7 @@ main = do
                 mouseBindings = myMouseBindings,
                 -- hooks, layouts
                 layoutHook = smartBorders $ myLayout,
-                manageHook = myManageHook <+> scratchpadManageHook (W.RationalRect 0.4 0.3 0.6 0.5),
+                manageHook = myManageHook, -- <+> scratchpadManageHook (W.RationalRect 0.4 0.3 0.6 0.5),
                 handleEventHook = myEventHook,
                 logHook = myLogHook >> updatePointer (0.5, 0.5) (0, 0),
                 startupHook = myStartupHook -- dynStatusBarStartup barInScreen (return ())
