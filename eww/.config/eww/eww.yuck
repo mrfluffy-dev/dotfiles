@@ -36,7 +36,7 @@
                                          :max-value 100 :min-value 0 :thickness 2 :size 20 "CPU")
                      (circular-progress :class "mem" :value "${round(EWW_RAM.used_mem/EWW_RAM.total_mem*100,0)}"
                                          :max-value 100 :min-value 0 :thickness 2 :size 20 "RAM")
-                       (button :class "time" :onclick "scripts/calendar calendar"
+                       (button :class "time" :onclick "$HOME/.config/eww/scripts/calendar calendar"
                                 "${date.hour}:${date.min} ${date.am_pm}")
                  (literal :class "idle" :content idle))))
 
@@ -48,6 +48,6 @@
                      :date "${date.year}-${date.month}-${date.day}"
                      :format "%a %d %b"))
 
-(deflisten workspace "scripts/workspace")
+(deflisten workspace "$HOME/.config/eww/scripts/workspace")
 
-(deflisten idle "scripts/idel")
+(deflisten idle "$HOME/.config/eww/scripts/idel")

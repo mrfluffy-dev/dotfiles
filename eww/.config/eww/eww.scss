@@ -4,28 +4,29 @@
     padding-right: 300px;
 }
 
-.0 , .01, .02, .03, .04, .05, .06, .07, .08, .09,
-.011, .022, .033, .044, .055, .066, .077, .088, .099,{
+.W0 , .W01, .W02, .W03, .W04, .W05, .W06, .W07, .W08, .W09,.W011, .W022, .W033, .W044, .W055, .W066, .W077, .W088, .W099,{
   margin: 0px 0px 0px 0px;
 }
 
-/* Unoccupied */
-.0 {
+// Unoccupied
+.W0 {
 	color: #606060;
 }
 
-/* Occupied */
-.01, .02, .03, .04, .05, .06, .07, .08, .09 {
+// Occupied 
+.W01, .W02, .W03, .W04, .W05, .W06, .W07, .W08, .W09 {
 	color:#959595;
     font-weight: bold;
 }
 
 
-/* Focused */
-.011, .022, .033, .044, .055, .066, .077, .088, .099{
+// Focused 
+.W011, .W022, .W033, .W044, .W055, .W066, .W077, .W088, .W099{
 	color: #ffffff;
 	font-weight:bold;
 }
+
+
 .bar_right{
     //padding left
     padding-left: 130px;
