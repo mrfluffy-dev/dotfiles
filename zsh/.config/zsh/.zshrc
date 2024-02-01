@@ -18,7 +18,6 @@ export FZF_CTRL_R_OPTS='--sort'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export TERMINAL="alacritty"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
-export NIX_PATH="$HOME/.nix-defexpr/channels"
 export LD_LIBRARY_PATH=/usr/local/lib:$HOME/.nix-profile/lib:$LD_LIBRARY_PATH
 
 autoload -U up-line-or-beginning-search
@@ -28,13 +27,13 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[N" down-line-or-beginning-search
-alias switch="sudo nixos-rebuild switch"
-alias steam="nixVulkanIntel steam"
-alias steam="nixVulkanIntel heroic"
+alias nix-switch="sudo nixos-rebuild switch"
+alias nix-upgrade="sudo nixos-rebuild switch --upgrade"
 alias nix-edit="sudo vim /etc/nixos/configuration.nix"
 alias ls="exa -lag --icons"
 alias upload="~/.config/script/upload.sh"
 alias record="~/.config/script/record.sh"
+alias speak="~/.config/script/wisper.sh"
 alias vim="nvim"
 alias cat="bat"
 alias anime="~/repos/ani-cli/ani-cli"
